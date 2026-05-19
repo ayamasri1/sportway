@@ -1,0 +1,18 @@
+<div class="my-3 d-flex justify-content-center">
+    <div class="d-flex justify-content-between w-75 align-items-center">
+        <i class="pi pi-bars menu" style="font-size: 1.5rem"></i>
+        <p class="m-0">logo</p>
+        <div class="d-flex gap-4 align-items-center">
+            <p-iconfield class="search-bar">
+                <p-inputicon class="pi pi-search" />
+                <input type="text" pInputText placeholder="Search" />
+            </p-iconfield>
+            <i class="pi pi-search search" style="font-size: 1.5rem"></i>
+            <i class="pi pi-shopping-cart cart" style="font-size: 1.5rem" (click)="openCart()"></i>
+        </div>
+    </div>
+</div>
+<p-drawer [(visible)]="cartVisibility" header="Drawer" position="right">
+    <p> Drawer works! </p>
+</p-drawer>
+<hr>

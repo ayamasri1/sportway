@@ -1,0 +1,37 @@
+.products-row{
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 0.5rem;
+}
+
+.products-row::-webkit-scrollbar {
+    display: none;
+}
+
+.product-row{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.product-card{
+    flex: 0 0 auto;
+    width:clamp(160px, 50vw, 350px);
+}
+
+@media (max-width: 768px) {
+  .scroll-btn {
+    display: none;
+  }
+
+  .btn-label {
+    display: none;
+  }
+
+  .p-button {
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,16 @@
+@media (min-width: 768px){
+    .menu, .search{
+        display: none;
+    }
+}
+
+@media (max-width: 767px){
+    .search-bar{
+        display:none;
+    }
+}
+
+.cart{
+    font-size: 1.5rem;
+    cursor: pointer;
+}

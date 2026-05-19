@@ -1,0 +1,29 @@
+.p-chip{
+    flex: 1 1 auto;
+    min-width: 111px;
+    max-width: 145px;
+    text-wrap: nowrap;
+}
+
+.p-chip-label{
+    text-align: center;
+}
+
+.tabs-container{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 2px;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+.tab{
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .tab{
+        display: none;
+    }
+}

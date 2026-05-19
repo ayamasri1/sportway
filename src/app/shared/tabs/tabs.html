@@ -1,0 +1,5 @@
+<div class="tabs-container mb-5 d-flex justify-content-around align-items-start">
+    @for (tab of tabs; track tab){
+        <p-chip label={{tab.label}} image={{tab.image}} alt={{tab.label}} class="tab" (click)="selectTab(tab)"/>
+    }
+</div>
