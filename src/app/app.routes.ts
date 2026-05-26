@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { Home } from './home/home';
-import { CategoryPage } from './category-page/category-page';
+import { CategoryPage } from './layouts/category-page/category-page';
 
 export const routes: Routes = [
     {
@@ -8,7 +8,7 @@ export const routes: Routes = [
         component: Home
     },
     {
-        path: 'browseCategory',
+        path: 'browseCategory/:slug',
         component: CategoryPage
     }
 ];

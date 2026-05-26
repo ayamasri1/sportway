@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChipModule } from 'primeng/chip';
-import { Tab } from '../../services/Tab Service/tab-service';
+import { Tab } from '../../core/services/Category Service/category-service';
 
 @Component({
   selector: 'app-tabs',
@@ -14,10 +14,16 @@ export class Tabs {
 
   constructor(private router: Router) {}
 
+  ngOnChanges(changes: SimpleChanges){
+    if (changes['tabs']) {
+      console.log('tabs updated:', this.tabs);
+    }
+  }
+
   selectTab(tab : Tab){
-    this.router.navigate(['/browseCategory'], {
+    this.router.navigate(['/browseCategory/'+ tab.slug], {
       state: {
-        subtabs: tab
+        category: tab
       }
     });
   }

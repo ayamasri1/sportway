@@ -1,3 +1,7 @@
-<app-tabs [tabs]="HomeTabs"/>
-<app-overview [title]="'New Arrivals'"/>
-<app-overview [title]="'On Sale'"/>
+@if(loading()===true){
+    <app-skeleton/>
+} @else {
+    <app-tabs [tabs]="HomeTabs()"/>
+    <app-overview [title]="'New Arrivals'"/>
+    <app-overview [title]="'On Sale'"/>
+}

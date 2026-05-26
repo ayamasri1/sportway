@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, signal, ViewChild } from '@angular/core';
-import { Product, ProductService } from '../../services/Product Service/product-service';
+import { Product, ProductService } from '../../core/services/Product Service/product-service';
 import { CurrencyPipe } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 
