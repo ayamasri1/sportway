@@ -3,7 +3,7 @@
 @if(loading()===true){
     <app-skeleton/>
 } @else {
-    @if (subtabs().length > 0) {
+    @if (subtabs().length > 1) {
         <app-tabs [tabs]="subtabs()"/>
     }
 

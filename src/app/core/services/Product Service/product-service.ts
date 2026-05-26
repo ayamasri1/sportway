@@ -1,78 +1,48 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+import { SupabaseService } from '../Supabase Service/supabase-service';
 
 export interface Product {
   id: number;
-  inventoryStatus: string;
-  category: string;
   name: string;
+  brand: string;
   price: number;
-  image: string;
+  baseImage: string;
+  availablestock: number;
+  slug: string;
+  SubCategory: {
+    label: string;
+  }[];
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private products: Product[] = [
-    {
-      id: 1,
-      name: 'Wireless Headphones',
-      category: 'Electronics',
-      price: 120,
-      inventoryStatus: 'INSTOCK',
-      image: 'headphones.jpg',
-    },
-    {
-      id: 2,
-      name: 'Running Shoes',
-      category: 'Sports',
-      price: 85,
-      inventoryStatus: 'LOWSTOCK',
-      image: 'shoes.jpg',
-    },
-    {
-      id: 3,
-      name: 'Smart Watch',
-      category: 'Electronics',
-      price: 200,
-      inventoryStatus: 'INSTOCK',
-      image: 'smartwatch.jpg',
-    },
-    {
-      id: 4,
-      name: 'Backpack',
-      category: 'Accessories',
-      price: 45,
-      inventoryStatus: 'OUTOFSTOCK',
-      image: 'backpack.jpg',
-    },
-    {
-      id: 5,
-      name: 'Gaming Mouse',
-      category: 'Electronics',
-      price: 60,
-      inventoryStatus: 'INSTOCK',
-      image: 'mouse.jpg',
-    },
-    {
-      id: 6,
-      name: 'Wireless Headphones',
-      category: 'Electronics',
-      price: 120,
-      inventoryStatus: 'INSTOCK',
-      image: 'headphones.jpg',
-    },
-    {
-      id: 7,
-      name: 'Running Shoes',
-      category: 'Sports',
-      price: 85,
-      inventoryStatus: 'LOWSTOCK',
-      image: 'shoes.jpg',
-    },
-  ];
 
-  getProducts(): Promise<Product[]> {
-    return Promise.resolve(this.products);
+  constructor(private supabaseService : SupabaseService){}
+
+  async getProductsByCategory(subcategory: string) {
+    const {data, error} = await this.supabaseService.client
+    .from('Product')
+    .select(`
+      id,
+      name,
+      brand,
+      price,
+      baseImage,
+      availablestock,
+      slug,
+      SubCategory!inner(label)
+    `)
+    .eq('SubCategory.label', subcategory)
+    .gt('availablestock', 0)
+    .eq('isActive', true)
+    .limit(7);
+
+    if(error){
+      throw error;
+    }
+
+    return data;
   }
 }
