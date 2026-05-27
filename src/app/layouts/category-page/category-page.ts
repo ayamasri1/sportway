@@ -4,8 +4,6 @@ import { Overview } from '../../shared/overview/overview';
 import { CategoryService, Tab } from '../../core/services/Category Service/category-service';
 import { Skeleton } from "../../shared/skeleton/skeleton";
 
-
-
 @Component({
   selector: 'app-category-page',
   imports: [Tabs, Overview, Skeleton],

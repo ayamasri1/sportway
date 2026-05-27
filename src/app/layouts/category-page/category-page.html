@@ -5,6 +5,8 @@
 } @else {
     @if (subtabs().length > 1) {
         <app-tabs [tabs]="subtabs()"/>
+    }@else {
+        <p>nothing to show yet</p>
     }
 
     @for (subtab of subtabs(); track subtab){

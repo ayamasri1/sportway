@@ -1,6 +1,6 @@
 <div class="my-3 d-flex justify-content-center">
     <div class="d-flex justify-content-between w-75 align-items-center">
-        <i class="pi pi-bars menu" style="font-size: 1.5rem"></i>
+        <i class="pi pi-bars menu" style="font-size: 1.5rem" (click)="openMenu()"></i>
         <p class="m-0">logo</p>
         <div class="d-flex gap-4 align-items-center">
             <p-iconfield class="search-bar">
@@ -14,5 +14,9 @@
 </div>
 <p-drawer [(visible)]="cartVisibility" header="Drawer" position="right">
     <p> Drawer works! </p>
+</p-drawer>
+
+<p-drawer [(visible)]="menuVisibility" position="left">
+    <p-tree [value]="categories()" selectionMode="single" (onNodeSelect)="getProductsByCategory($event)" />
 </p-drawer>
 <hr>
