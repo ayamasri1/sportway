@@ -10,7 +10,7 @@ export interface Product {
   availablestock: number;
   slug: string;
   SubCategory: {
-    label: string;
+    slug: string;
   }[];
 }
 
@@ -32,9 +32,9 @@ export class ProductService {
       baseImage,
       availablestock,
       slug,
-      SubCategory!inner(label)
+      SubCategory!inner(slug)
     `)
-    .eq('SubCategory.label', subcategory)
+    .eq('SubCategory.slug', subcategory)
     .gt('availablestock', 0)
     .eq('isActive', true)
     .limit(7);

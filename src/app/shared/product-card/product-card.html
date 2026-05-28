@@ -1,0 +1,24 @@
+@if (!product){
+    <p>No products to show for now.. Please try again later.</p>
+} @else {
+    <div class="product-card p-2">
+        <div class="p-4 border rounded d-flex flex-column">
+            <img class="rounded w-100" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.baseImage" [alt]="product.name" style="max-width: 300px; min-width:100px" />
+            <div class="pt-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="h5 fw-medium">{{ product.name }}</div>
+                        <span class="fw-medium h6 mt-1">{{ product.brand }}</span>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-1">
+                    <span class="h5 p-0 m-0 fw-semibold">{{ product.price | currency: 'USD' }}</span>
+                    <button pButton [disabled]="product.availablestock === 0" class="text-nowrap w-auto">
+                        <i class="pi pi-shopping-cart"></i>
+                        <span class="btn-label fw-semibold">Add to Cart</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -3,6 +3,7 @@ import { Tabs } from '../../shared/tabs/tabs';
 import { Overview } from '../../shared/overview/overview';
 import { CategoryService, Tab } from '../../core/services/Category Service/category-service';
 import { Skeleton } from "../../shared/skeleton/skeleton";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-category-page',
@@ -13,13 +14,18 @@ import { Skeleton } from "../../shared/skeleton/skeleton";
 export class CategoryPage implements OnInit{
   subtabs = signal<Tab[]>([]);
   loading = signal<boolean>(true);
+  CategoryTitle = signal<string>('');
 
-  constructor(private categoryService: CategoryService) {}
+  constructor(private categoryService: CategoryService, private route: ActivatedRoute) {}
 
   async ngOnInit() {
-    this.subtabs.set(await this.categoryService.getSubCategories(history.state.category.id));
-    this.loading.set(false);
+    this.route.params.subscribe(async params =>{
+      const category = params['categorySlug'];
+      if(!category) return;
+      this.loading.set(true);
+      this.CategoryTitle.set(category.charAt(0).toUpperCase() + category.slice(1));
+      this.subtabs.set(await this.categoryService.getSubCategories(category));
+      this.loading.set(false);
+    })
   }
-
-  CategoryTitle = signal<string>(history.state.category.label);
 }

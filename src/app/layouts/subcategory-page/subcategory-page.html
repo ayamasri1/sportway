@@ -1,1 +1,16 @@
-<p>subcategory-page works!</p>
+<h1 class="display-2 mb-sm-5 mb-0 text-center fw-semibold">{{CategoryTitle()}} Collection</h1>
+
+@if(loading()){
+    <app-skeleton/>
+} @else{
+    @if(products().length != 0){
+        <div class="row">
+            @for(product of products(); track product.id){
+                <div class="col-lg-4 col-sm-6">
+                    <app-product-card [product]="product"/>
+                </div>
+            }
+        </div>
+    }
+}
+

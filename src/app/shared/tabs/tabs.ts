@@ -1,5 +1,5 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChipModule } from 'primeng/chip';
 import { Tab } from '../../core/services/Category Service/category-service';
 
@@ -12,7 +12,7 @@ import { Tab } from '../../core/services/Category Service/category-service';
 export class Tabs {
   @Input() tabs: Tab[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route : ActivatedRoute) {}
 
   ngOnChanges(changes: SimpleChanges){
     if (changes['tabs']) {
@@ -21,10 +21,13 @@ export class Tabs {
   }
 
   selectTab(tab : Tab){
-    this.router.navigate(['/browseCategory/'+ tab.slug], {
-      state: {
-        category: tab
-      }
-    });
+    const paramCount = this.route.snapshot.paramMap.keys.length;
+    console.log(paramCount);
+    if (paramCount === 0){
+      this.router.navigate(['/browseCategory/'+ tab.slug]);
+    } else {
+      this.router.navigate([tab.slug],{ relativeTo: this.route });
+    }
+    
   }
 }

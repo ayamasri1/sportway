@@ -1,17 +1,21 @@
 import { Component, ElementRef, Input, signal, ViewChild } from '@angular/core';
 import { Product, ProductService } from '../../core/services/Product Service/product-service';
-import { CurrencyPipe } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
 import { Skeleton } from "../skeleton/skeleton";
+import { ProductCard } from "../product-card/product-card";
+import { ButtonModule } from 'primeng/button';
+import { CurrencyPipe } from '@angular/common';
+import { Tab } from '../../core/services/Category Service/category-service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-overview',
-  imports: [CurrencyPipe, ButtonModule, Skeleton],
+  imports: [Skeleton, ProductCard, ButtonModule],
   templateUrl: './overview.html',
   styleUrl: './overview.css',
 })
 export class Overview {
-  @Input() title: string = '';
+  @Input() tabTitle: Tab | null = null;
+  title: string = '';
   products= signal<Product[]>([]);
   loading = signal(true);
 
@@ -19,10 +23,11 @@ export class Overview {
 
   scrollAmount=300;
 
-  constructor(private productService: ProductService){}
+  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute){}
 
   async ngOnInit(){
-    this.products.set(await this.productService.getProductsByCategory(this.title));
+    this.title = this.tabTitle?.label || '';
+    this.products.set(await this.productService.getProductsByCategory(this.tabTitle?.slug || ''));
     this.loading.set(false);
   }
 
@@ -40,5 +45,9 @@ export class Overview {
       left: container.clientWidth * 0.8,
       behavior: 'smooth'
     });
+  }
+
+  viewAll(){
+    this.router.navigate([this.tabTitle?.slug],{ relativeTo: this.route });
   }
 }

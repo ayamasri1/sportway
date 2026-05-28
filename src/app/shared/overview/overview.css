@@ -15,23 +15,12 @@
     scrollbar-width: none;
 }
 
-.product-card{
-    flex: 0 0 auto;
-    width:clamp(160px, 50vw, 350px);
+.view-all{
+  cursor: pointer;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .scroll-btn {
     display: none;
-  }
-
-  .btn-label {
-    display: none;
-  }
-
-  .p-button {
-    width: 40px;
-    height: 40px;
-    justify-content: center;
   }
 }

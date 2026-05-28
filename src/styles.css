@@ -1,2 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
+
+.product-card{
+    flex: 0 0 auto;
+    /* width:clamp(160px, 50vw, 350px); */
+}
+
+@media (max-width: 767px) {
+  .btn-label {
+    display: none;
+  }
+
+  .p-button {
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+  }
+}

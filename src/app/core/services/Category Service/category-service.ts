@@ -26,11 +26,14 @@ export class CategoryService {
     return data;
   }
 
-  async getSubCategories(categoryId: string){
+  async getSubCategories(categorySlug: string){
     const {data, error} = await this.supabase.client
       .from('SubCategory')
-      .select('*')
-      .eq('categoryId', categoryId);
+      .select(`
+        *,
+        Category!inner(slug)
+      `)
+      .eq('Category.slug', categorySlug);
 
     if (error){
       throw error;
