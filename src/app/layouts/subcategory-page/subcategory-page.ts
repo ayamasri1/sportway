@@ -22,7 +22,7 @@ export class SubcategoryPage implements OnInit {
     this.route.params.subscribe(async params =>{
       const subCategory = params['subcategorySlug'];
       if(!subCategory) return;
-      const title = subCategory.split('-').pop().charAt(0).toUpperCase() + subCategory.split('-').pop().slice(1);
+      const title = subCategory.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
       this.loading.set(true);
       this.CategoryTitle.set(title);
       this.products.set(await this.productService.getProductsByCategory(subCategory));

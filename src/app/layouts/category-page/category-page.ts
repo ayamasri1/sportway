@@ -24,6 +24,7 @@ export class CategoryPage implements OnInit{
       if(!category) return;
       this.loading.set(true);
       this.CategoryTitle.set(category.charAt(0).toUpperCase() + category.slice(1));
+      this.CategoryTitle.set(category.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' '));
       this.subtabs.set(await this.categoryService.getSubCategories(category));
       this.loading.set(false);
     })

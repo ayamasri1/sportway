@@ -8,7 +8,7 @@
     }
 
     @for (subtab of subtabs(); track subtab){
-        <app-overview [tabTitle]="subtab"/>
+        <app-overview [tabTitle]="subtab.slug"/>
     }
 }
 

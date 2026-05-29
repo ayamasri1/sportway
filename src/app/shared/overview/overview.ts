@@ -14,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './overview.css',
 })
 export class Overview {
-  @Input() tabTitle: Tab | null = null;
+  @Input() tabTitle: string | null = null;
   title: string = '';
   products= signal<Product[]>([]);
   loading = signal(true);
@@ -26,8 +26,8 @@ export class Overview {
   constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute){}
 
   async ngOnInit(){
-    this.title = this.tabTitle?.label || '';
-    this.products.set(await this.productService.getProductsByCategory(this.tabTitle?.slug || ''));
+    this.title = this.tabTitle?.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') || '';
+    this.products.set(await this.productService.getProductsByCategory(this.tabTitle || ''));
     this.loading.set(false);
   }
 
@@ -48,6 +48,6 @@ export class Overview {
   }
 
   viewAll(){
-    this.router.navigate([this.tabTitle?.slug],{ relativeTo: this.route });
+    this.router.navigate([this.tabTitle],{ relativeTo: this.route });
   }
 }

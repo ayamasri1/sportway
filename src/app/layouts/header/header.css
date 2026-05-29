@@ -2,6 +2,10 @@
     .menu, .search{
         display: none;
     }
+
+    ::ng-deep .p-drawer-right.p-drawer {
+        width: 30rem !important;
+    }
 }
 
 @media (max-width: 767px){
